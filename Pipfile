@@ -1,0 +1,58 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"boto3" = "*"
+marshmallow-enum = "*"
+Flask = "*"
+Flask-Cors = "*"
+SQLAlchemy = "*"
+Werkzeug = "*"
+bcrypt = "*"
+Flask-Script = "*"
+marshmallow = ">=3.0.0"
+flask-rest-api = "*"
+apispec = "*"
+flask-jwt-extended = "*"
+requests = "*"
+Faker = "*"
+factory_boy = "*"
+pynamodb = "*"
+
+[dev-packages]
+pytest-factoryboy = "*"
+"flake8" = "*"
+pytest = "*"
+mypy = "*"
+importmagic = "*"
+epc = "*"
+pytest-xdist = "*"
+watchdog = "*"
+pudb = "*"
+ipdb = "*"
+mypy_extensions = ">=0.4.1"
+Faker = "*"
+autoflake = "*"
+"python-language-server[all]" = "*"
+black = "*"
+pre-commit = "*"
+pyls-isort = "*"
+pyls-mypy = "*"
+pyls-black = "*"
+python-language-server = {extras = ["all"],version = "*"}
+moto = "*"
+rope = "*"
+flask-shell-ipython = "*"
+cfn-lint = "*"
+pytest-mypy = "*"
+sphinx = "*"
+sphinx-autodoc-typehints = "*"
+sphinx-rtd-theme = "*"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
