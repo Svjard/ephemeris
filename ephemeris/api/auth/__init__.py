@@ -38,9 +38,13 @@ def login(email: str, password: str):
 @blp.arguments(RegisterRequest, as_kwargs=True)
 def register(email: str, first_name: str, last_name: str, password: str):
   """Register a new user"""
-  user = User.create_obj(email, first_name, last_name, password)
-  user.save()
-
+  try:
+    user = User.get(email)
+    return {"message": "User with this email has already been registered"}
+  except User.DoesNotExist:
+    user = User.create_obj(email, first_name, last_name, password)
+    user.save()
+  
   return {"message": "User has been successfully registered"}
 
 
