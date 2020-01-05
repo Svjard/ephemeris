@@ -10,7 +10,7 @@ from flask import jsonify
 from .api import api, init_views
 from .commands import init_cli
 from .flask import App
-from .db import init_db
+from .db import init_db, seed_db
 from .aws import update_app_config
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
@@ -21,28 +21,26 @@ log = logging.getLogger(__name__)
 
 
 def create_app(test_config=None) -> App:
-  print('init 1')
   app = App("ephemeris")
 
   # load config
-  print('init 2')
   configure(app=app, test_config=test_config)
 
   # extensions
-  print('init 3')
   CORS(app)
   app.wsgi_app = ProxyFix(app.wsgi_app)  # type: ignore
   api.init_app(app)  # flask-rest-api
 
   # CLI
   manager = Manager(app)
-  print('init 5')
   init_cli(app, manager)
 
-  print('init db')
-  init_db(app)
-  print('init auth')
+  init_db()
   init_auth(app)
+  init_views()
+
+  if test_config is not None:
+    seed_db()
 
   return app
 

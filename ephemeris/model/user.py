@@ -4,10 +4,16 @@ from pynamodb.attributes import (
 )
 import bcrypt
 import uuid
+import os
+
+local_env = ['test', 'development']
+
 
 class User(Model):
   class Meta:
     table_name = 'user'
+    host = "http://localhost:8000" if os.getenv('FLASK_ENV', 'development') in local_env else None
+
   id = UnicodeAttribute()
   email = UnicodeAttribute(hash_key=True)
   email_validated = BooleanAttribute(default=False, default_for_new=False)
@@ -39,9 +45,8 @@ class User(Model):
   def password(self, plaintext):
     self.pwdkey = bcrypt.hashpw(plaintext.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
-  @classmethod
   def is_correct_password(self, plaintext):
-    return bcrypt.checkpw(plaintext, self.pwdkey)
+    return bcrypt.checkpw(plaintext.encode('utf-8'), self.pwdkey.encode('utf-8'))
 
   def __repr__(self):
     return str(vars(self))

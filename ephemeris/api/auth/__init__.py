@@ -28,6 +28,8 @@ def login(email: str, password: str):
   except User.DoesNotExist:
     abort(401, message="Wrong user name or password")
   
+  print(user.email)
+  print(user.pwdkey)
   if not user.is_correct_password(password):
       abort(401, message="Wrong user name or password")
   """Handle MFA"""

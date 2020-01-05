@@ -1,3 +1,4 @@
+from .db import seed_db
 from .model import User
 
 """CLI commands."""
@@ -11,6 +12,14 @@ def init_cli(app, manager):
       print("Success")
 
     manager.add_command(purge_db_cmd)
+
+    # seed db
+    @app.cli.command("seed-db", help="Seed the database with test data")
+    def seed_db_cmd():
+      print(f"Seeding db")
+      seed_db()
+
+    manager.add_command(seed_db_cmd)
 
     # config check
     @app.cli.command("config", help="View configuration")

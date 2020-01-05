@@ -1,10 +1,12 @@
-from scheduleai.db.fixtures import DEFAULT_PASSWORD
+
+DEFAULT_PASSWORD = "password"
 
 
-def test_login(client_unauthenticated, user, db_session):
+def test_login(client_unauthenticated):
     response = client_unauthenticated.post(
-        "/api/auth/login", json=dict(email=user.email, password=DEFAULT_PASSWORD)
+        "/api/auth/login", json=dict(email="test1@test.com", password=DEFAULT_PASSWORD)
     )
+    print(response)
     assert response.status_code == 200
     assert response.json.get("access_token")
     assert response.json.get("refresh_token")
