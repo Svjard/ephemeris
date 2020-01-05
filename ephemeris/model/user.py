@@ -3,27 +3,43 @@ from pynamodb.attributes import (
   UnicodeAttribute, BooleanAttribute, UTCDateTimeAttribute
 )
 import bcrypt
+import uuid
 
 class User(Model):
   class Meta:
-    table_name = 'User'
+    table_name = 'user'
   id = UnicodeAttribute()
-  email = UnicodeAttribute(range_key=True)
+  email = UnicodeAttribute(hash_key=True)
   email_validated = BooleanAttribute(default=False, default_for_new=False)
 
   first_name = UnicodeAttribute()
-  last_lame = UnicodeAttribute()
+  last_name = UnicodeAttribute()
+  
+  last_login = UTCDateTimeAttribute(null=True)
+
+  mfa_enabled = BooleanAttribute(default=False, default_for_new=False)
+  mfa_secret = UnicodeAttribute(null=True)
 
   pwdkey = UnicodeAttribute()
 
+  @staticmethod
+  def create_obj(email, first_name, last_name, password):
+    obj = User(email)
+    obj.id = str(uuid.uuid4().fields[-1])[:8]
+    obj.first_name = first_name
+    obj.last_name = last_name
+    obj.password = password
+    return obj
+
   @property
   def password(self):
-    return self.pwdkey
+    return self.pwdkey.decode("utf-8")
 
   @password.setter  # type: ignore
   def password(self, plaintext):
-    self.pwdkey = bcrypt.hashpw(plaintext, bcrypt.gensalt())
+    self.pwdkey = bcrypt.hashpw(plaintext.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
+  @classmethod
   def is_correct_password(self, plaintext):
     return bcrypt.checkpw(plaintext, self.pwdkey)
 

@@ -10,35 +10,38 @@ from flask import jsonify
 from .api import api, init_views
 from .commands import init_cli
 from .flask import App
-from .aws import update_app_config, db_secret_to_url
+from .db import init_db
+from .aws import update_app_config
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_script import Manager
 from werkzeug.contrib.fixers import ProxyFix
-from nplusone.ext.flask_sqlalchemy import NPlusOne
 
 log = logging.getLogger(__name__)
 
 
 def create_app(test_config=None) -> App:
+  print('init 1')
   app = App("ephemeris")
 
   # load config
+  print('init 2')
   configure(app=app, test_config=test_config)
 
   # extensions
+  print('init 3')
   CORS(app)
   app.wsgi_app = ProxyFix(app.wsgi_app)  # type: ignore
-  configure_database(app)
   api.init_app(app)  # flask-rest-api
-  NPlusOne(app)
 
   # CLI
   manager = Manager(app)
-  print('init cli')
+  print('init 5')
   init_cli(app, manager)
 
-  init_views()
+  print('init db')
+  init_db(app)
+  print('init auth')
   init_auth(app)
 
   return app
@@ -66,15 +69,6 @@ def init_auth(app):
     assert user.id
     return user.id
 
-
-def configure_database(app):
-  @app.teardown_appcontext
-  def shutdown_session(exception=None):
-    """Close session after request.
-
-    Ensures no open transactions remain.
-    """
-    pass
 
 
 def configure_class(app):

@@ -11,6 +11,8 @@ You will need to have the following dependencies:
 * pip3
 * pipenv
   * ```brew install pipenv```
+* docker (for running locally)
+* docker-compose (for running locally)
 
 ### Setting up your environment
 

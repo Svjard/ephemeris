@@ -7,7 +7,7 @@ from flask_jwt_extended import (
   get_current_user,
 )
 from ephemeris.model.user import User
-from .schema import LoginRequest, AuthResponse, TokenRefreshResponseSchema
+from .schema import LoginRequest, AuthResponse, RegisterRequest, TokenRefreshResponseSchema
 
 blp = Blueprint("Authentication", __name__, url_prefix="/api/auth")
 
@@ -23,11 +23,25 @@ def auth_response_for_user(user):
 @blp.response(AuthResponse)
 def login(email: str, password: str):
   """Login with username + password."""
-  user = User.query.filter_by(email=email).one_or_none()
-  if not user or not user.is_correct_password(password):
+  try:
+    user = User.get(email)
+  except User.DoesNotExist:
+    abort(401, message="Wrong user name or password")
+  
+  if not user.is_correct_password(password):
       abort(401, message="Wrong user name or password")
   """Handle MFA"""
   return auth_response_for_user(user)
+
+
+@blp.route("register", methods=["POST"])
+@blp.arguments(RegisterRequest, as_kwargs=True)
+def register(email: str, first_name: str, last_name: str, password: str):
+  """Register a new user"""
+  user = User.create_obj(email, first_name, last_name, password)
+  user.save()
+
+  return {"message": "User has been successfully registered"}
 
 
 @blp.route("refresh", methods=["POST"])
