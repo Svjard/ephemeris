@@ -8,6 +8,8 @@ from flask_jwt_extended import (
 )
 from ephemeris.model.user import User
 from .schema import LoginRequest, AuthResponse, RegisterRequest, TokenRefreshResponseSchema
+from ephemeris.aws.ses import send_email
+from string import Template
 
 blp = Blueprint("Authentication", __name__, url_prefix="/api/auth")
 
@@ -28,8 +30,6 @@ def login(email: str, password: str):
   except User.DoesNotExist:
     abort(401, message="Wrong user name or password")
   
-  print(user.email)
-  print(user.pwdkey)
   if not user.is_correct_password(password):
       abort(401, message="Wrong user name or password")
   """Handle MFA"""
@@ -46,6 +46,13 @@ def register(email: str, first_name: str, last_name: str, password: str):
   except User.DoesNotExist:
     user = User.create_obj(email, first_name, last_name, password)
     user.save()
+    f=open("../email/welcome.html", "r")
+    if f.mode == 'r':
+      contents =f.read()
+      s = Template(contents)
+      s.substitute(who='{} {}'.format(first_name, last_name), link='https://ephemeris.xyz/')
+      send_email(to=email, subject="Welcome to Ephemeris", content=s)
+    f.close()
   
   return {"message": "User has been successfully registered"}
 

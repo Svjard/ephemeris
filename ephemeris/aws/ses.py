@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 FROM = "no-reply@ephemeris.xyz"
 
-def send_email(to, cc=[], subject, content, attachments):
+def send_email(to, cc=[], subject, v, attachments):
   """Send an email via SES"""
   client = boto3.client(service_name="ses")
     Source=FROM,
@@ -23,26 +23,19 @@ def send_email(to, cc=[], subject, content, attachments):
         'Data': subject
       },
       'Body': {
-            'Text': {
-                'Data': 'string',
-                'Charset': 'string'
-            },
-            'Html': {
-                'Data': 'string',
-                'Charset': 'string'
-            }
+        'Html': {
+          'Data': content,
         }
+      }
     },
-    ReturnPath='string',
-    SourceArn='string',
-    ReturnPathArn='string',
     Tags=[
-        {
-            'Name': 'string',
-            'Value': 'string'
-        },
-    ],
-    ConfigurationSetName='string'
-)
-
-  return json.loads(secrets)
+      {
+        'Name': 'app',
+        'Value': 'ephemeris'
+      },
+      {
+        'Name': 'type',
+        'Value': 'register'
+      }
+    ]
+  )
