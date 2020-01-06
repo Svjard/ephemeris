@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { keyframes } from '@emotion/core'
-import styled from '../../utils/styled'
+import styled from '@emotion/styled'
 
 const LoadingSpinner: React.SFC = () => (
   <Spinner>
@@ -38,7 +38,7 @@ const Spinner = styled('div')`
 
   & .cube1,
   & .cube2 {
-    background-color: ${props => props.theme.colors.brand};
+    background-color: #444;
     width: 15px;
     height: 15px;
     position: absolute;

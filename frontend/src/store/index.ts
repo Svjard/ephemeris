@@ -3,11 +3,8 @@ import { all, fork } from 'redux-saga/effects'
 import { connectRouter, RouterState } from 'connected-react-router'
 import { History } from 'history'
 
-import { LayoutState, layoutReducer } from './layout'
-
 // The top-level state object
 export interface ApplicationState {
-  layout: LayoutState
   router: RouterState
 }
 
@@ -16,7 +13,6 @@ export interface ApplicationState {
 // the reducer acts on the corresponding ApplicationState property type.
 export const createRootReducer = (history: History) =>
   combineReducers({
-    layout: layoutReducer,
     router: connectRouter(history)
   })
 

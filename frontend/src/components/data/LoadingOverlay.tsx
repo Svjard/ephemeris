@@ -1,5 +1,5 @@
 import { transparentize } from 'polished'
-import styled from '../../utils/styled'
+import styled from '@emotion/styled'
 
 const LoadingOverlay = styled('div')`
   position: absolute;
@@ -8,7 +8,7 @@ const LoadingOverlay = styled('div')`
   left: 0;
   right: 0;
   z-index: 10;
-  background: ${props => transparentize(0.25, props.theme.colors.background)};
+  background: ${props => transparentize(0.25, '#fff')};
 `
 
 export default LoadingOverlay

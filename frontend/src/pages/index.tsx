@@ -1,7 +1,7 @@
 import * as React from 'react'
+import styled from '@emotion/styled'
 import Page from '../components/layout/Page'
 import Container from '../components/layout/Container'
-import styled from '../utils/styled'
 
 function IndexPage() {
   return (

@@ -46,4 +46,18 @@ Everyday scheduling with the help of AI.
 
 ### Frontend
 
+  #### Pre-requisites:
 
+  Run the following commands to setup dependencies:
+
+  ```npm install```
+
+  #### Running
+
+  ```npm run start```
+
+  Then open http://localhost:3000/ in the browser.
+
+  #### Testing
+
+  ```npm run test```
