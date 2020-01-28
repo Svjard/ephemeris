@@ -7,6 +7,7 @@ import LoginPage from './pages/Login'
 import RegisterPage from './pages/Register'
 import ForgotPage from './pages/Forgot'
 import AgreementsPage from './pages/Agreement'
+import NavBar from './components/NavBar'
 
 const Routes: React.SFC = () => (
   <Root>
@@ -17,6 +18,7 @@ const Routes: React.SFC = () => (
       <Route exact path="/terms-of-service" component={() => <AgreementsPage agreementType="terms-of-service" />} />
       <Route exact path="/privacy-policy" component={() => <AgreementsPage agreementType="privacy-policy" />} />
       <div style={{width: 1000, margin: '0 auto'}}>
+        <NavBar />
         <Switch>
           <Route exact path="/" component={IndexPage} />
           <Route component={() => <div>Not Found</div>} />
