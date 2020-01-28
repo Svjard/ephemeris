@@ -41,8 +41,6 @@ Everyday scheduling with the help of AI.
 
   Once your flask dev server is running:
   * [OpenAPI JSON](http://localhost:5000/api/openapi.json) (http://localhost:5000/api/openapi.json)
-  * [Swagger UI](http://localhost:5000/api/swagger) (http://localhost:5000/api/swagger)
-  * [ReDoc](http://localhost:5000/api/doc) (http://localhost:5000/api/doc)
 
 ### Frontend
 

@@ -6,17 +6,21 @@ import logging
 log = logging.getLogger(__name__)
 
 
-FROM = "no-reply@ephemeris.xyz"
-
+#FROM = "no-reply@ephemeris.xyz"
+FROM = "mcfisher83@gmail.com"
 
 def send_email(to, subject, content, cc=[], attachments=[]):
     """Send an email via SES"""
     client = boto3.client(service_name="ses")
+    toList = to
+    if isinstance(to, str):
+        toList = [to]
+    
     try:
         response = client.send_email(
             Source=FROM,
             Destination={
-                'ToAddresses': to,
+                'ToAddresses': toList,
                 'CcAddresses': cc,
             },
             Message={

@@ -20,3 +20,8 @@ class AuthResponse(Schema):
 
 class TokenRefreshResponseSchema(Schema):
     access_token = f.String()
+
+
+class VerifyUserRequest(Schema):
+    email = f.String(required=True, allow_none=False)
+    verification_token = f.String(required=True, allow_none=False)
