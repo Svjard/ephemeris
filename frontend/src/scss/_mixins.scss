@@ -1,47 +1,44 @@
-@import 'mixins/animation';
-@import 'mixins/appearance';
-@import 'mixins/background-gradient';
-@import 'mixins/border-radius';
-@import 'mixins/box-shadow';
-@import 'mixins/clearfix';
-@import 'mixins/column-count';
-@import 'mixins/column-gap';
-@import 'mixins/display-flex';
-@import 'mixins/display-inline-flex';
-@import 'mixins/filter';
-@import 'mixins/flex-align';
-@import 'mixins/flex-basis';
-@import 'mixins/flex-direction-column';
-@import 'mixins/flex-direction-row';
-@import 'mixins/flex-flow';
-@import 'mixins/flex-grow';
-@import 'mixins/flex-justify-content';
-@import 'mixins/flex-wrap';
-@import 'mixins/flex';
-@import 'mixins/fontawesome';
-@import 'mixins/gradient-enabled';
-@import 'mixins/gradient-linear';
-@import 'mixins/helper-color';
-@import 'mixins/helper-font-size';
-@import 'mixins/helper-font-weight';
-@import 'mixins/helper-opacity';
-@import 'mixins/helper-row-space';
-@import 'mixins/helper-size';
-@import 'mixins/helper-spacing';
-@import 'mixins/keyframe';
-@import 'mixins/placeholder';
-@import 'mixins/transform';
-@import 'mixins/transition';
+/* Mixins */
 
-// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
-// Makes the @content apply to the given breakpoint and narrower.
-@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
-  $max: breakpoint-max($name, $breakpoints);
-  @if $max {
-    @media (max-width: $max) {
-      @content;
-    }
-  } @else {
-    @content;
-  }
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+@mixin opacity($opacity) {
+    opacity: $opacity;
+}
+@mixin transition($transition) {
+    -webkit-transition: $transition;
+       -moz-transition: $transition;
+        -ms-transition: $transition;
+         -o-transition: $transition;
+            transition: $transition;
+}
+@mixin animation($animation) {
+    -webkit-animation: $animation;
+       -moz-animation: $animation;
+            animation: $animation;
+}
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+       -moz-transform: $transform;
+        -ms-transform: $transform;
+         -o-transform: $transform;
+            transform: $transform;
+}
+@mixin clearfix() {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 }

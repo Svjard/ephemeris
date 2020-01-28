@@ -6,8 +6,6 @@ import Main from './main'
 import * as serviceWorker from './serviceWorker'
 import configureStore from './configureStore'
 
-import 'typeface-ibm-plex-sans'
-
 const history = createBrowserHistory()
 
 const initialState = window.INITIAL_REDUX_STATE

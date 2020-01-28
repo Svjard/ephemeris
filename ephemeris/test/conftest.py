@@ -1,4 +1,3 @@
-import os
 from faker import Faker
 import pytest
 from ephemeris.create_app import create_app
@@ -40,4 +39,3 @@ def client(app, user, session):
 @pytest.fixture(scope="session")
 def faker():
     return Faker(LOCALE)
-

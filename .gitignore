@@ -29,4 +29,5 @@ instance.cfg
 script/initialize_project.sh
 .mypy_cache
 
+.DS_Store
 .idea/

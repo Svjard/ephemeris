@@ -1,12 +1,12 @@
 {
-  "name": "Allied Sage",
-  "short_name": "Allied Sage",
+  "name": "Ephemeris",
+  "short_name": "ephemeris",
   "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#000000",
-  "description": "Allied Sage",
+  "description": "Ephemeris - Putting intelligence behing bulk scheduling.",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,41 +1,47 @@
 """Access AWS Secrets Manager."""
 import boto3
-import os
-import json
+from botocore.exceptions import ClientError
 import logging
-from string import Template
 
 log = logging.getLogger(__name__)
 
 
 FROM = "no-reply@ephemeris.xyz"
 
-def send_email(to, cc=[], subject, v, attachments):
-  """Send an email via SES"""
-  client = boto3.client(service_name="ses")
-    Source=FROM,
-    Destination={
-      'ToAddresses': to,
-      'CcAddresses': cc,
-    },
-    Message={
-      'Subject': {
-        'Data': subject
-      },
-      'Body': {
-        'Html': {
-          'Data': content,
-        }
-      }
-    },
-    Tags=[
-      {
-        'Name': 'app',
-        'Value': 'ephemeris'
-      },
-      {
-        'Name': 'type',
-        'Value': 'register'
-      }
-    ]
-  )
+
+def send_email(to, subject, content, cc=[], attachments=[]):
+    """Send an email via SES"""
+    client = boto3.client(service_name="ses")
+    try:
+        response = client.send_email(
+            Source=FROM,
+            Destination={
+                'ToAddresses': to,
+                'CcAddresses': cc,
+            },
+            Message={
+                'Subject': {
+                    'Data': subject
+                },
+                'Body': {
+                    'Html': {
+                        'Data': content,
+                    }
+                }
+            },
+            Tags=[
+                {
+                    'Name': "app",
+                    'Value': "ephemeris"
+                },
+                {
+                    'Name': "type",
+                    'Value': "register"
+                }
+            ]
+        )
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+    else:
+        print("Email sent! Message ID:"),
+        print(response['MessageId'])

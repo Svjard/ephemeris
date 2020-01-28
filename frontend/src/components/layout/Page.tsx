@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 
 const Page = styled('div')`
-  display: flex;
-  flex-direction: row;
-  flex: 1 1 auto;
-  padding-bottom: 3rem;
+  height: 100%;
+  padding-top: 2.75rem;
+  @media (max-width: 767px) {
+    padding-top: 5.5625rem;
+  }
 `
 
 export default Page

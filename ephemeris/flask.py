@@ -5,5 +5,5 @@ from flask.config import Config
 
 
 class App(Flask):
-  config: Config
-  pass
+    config: Config
+    pass

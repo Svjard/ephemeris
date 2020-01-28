@@ -6,7 +6,7 @@ import { History } from 'history'
 
 import Routes from './routes'
 import { ApplicationState } from './store'
-import './scss/styles.scss'
+import './scss/style.scss'
 
 // Any additional component props go here.
 interface MainProps {
