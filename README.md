@@ -1,6 +1,8 @@
 ## Ephemeris
 
-Everyday scheduling with the help of AI.
+Bulk scheduling with variable variation with the help of machine learning.
+
+Coming Soon...
 
 ![Coming Soon](https://raw.githubusercontent.com/Svjard/ephemeris/master/.github/screenshot1.png)
 
