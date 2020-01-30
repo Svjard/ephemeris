@@ -5,6 +5,12 @@ VENV=pipenv run
 run:
 	FLASK_ENV=development flask run --reload
 
+dynamodb:
+	docker run -d -p 8000:8000 amazon/dynamodb-local 
+
+dynamodb-purge:
+	aws dynamodb delete-table --table-name user --endpoint-url http://localhost:8000
+
 test:
 	pytest
 

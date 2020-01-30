@@ -16,6 +16,7 @@ var/
 .installed.cfg
 *.egg
 venv/
+curl.commands.txt
 
 # Serverless
 .serverless

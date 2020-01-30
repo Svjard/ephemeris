@@ -65,7 +65,6 @@
 .login select.form-control:not([size]):not([multiple]),
 .inverse-mode .login select.form-control:not([size]):not([multiple]) {
 	background: rgba(255,255,255,0.3);
-	border-color: transparent;
 	color: $color_white;
 }
 .login .control-label {

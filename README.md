@@ -2,6 +2,8 @@
 
 Everyday scheduling with the help of AI.
 
+![Coming Soon](https://raw.githubusercontent.com/Svjard/ephemeris/master/.github/screenshot1.png)
+
 ## Development
 
 ### API
