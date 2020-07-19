@@ -16,7 +16,7 @@
     "emotion-theming": "^10.0.14",
     "handlebars": "^4.7.2",
     "history": "^4.9.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.22.2",
     "polished": "^3.4.1",
     "prop-types": "^15.0.0",
